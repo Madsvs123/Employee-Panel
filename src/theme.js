@@ -11,10 +11,10 @@ const themeSettings = () => {
                 }
                 , 
                 neutral : {
-                    light : "#EEEE",
-                    main : "#CCCCC",
-                    medium : "#888888",
-                    dark : "#666"
+                    light : "#ebebeb",
+                    main : "#bfbfbf",
+                    medium : "#b3b3b3",
+                    dark : "#777777"
                 },
                 background : {
                     default : "#F3EEEA"
@@ -22,7 +22,7 @@ const themeSettings = () => {
         },
         typography : {
             fontFamily: ["Rubik", "sans-serif"].join(","),
-            fontSize: 12,
+            fontSize: 14,
             h1: {
               fontFamily: ["Rubik", "sans-serif"].join(","),
               fontSize: 40,

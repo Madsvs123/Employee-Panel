@@ -2,7 +2,7 @@ import { Box, Button, Modal, Typography, useTheme } from "@mui/material"
 import axios from "axios"
 import { useData } from "../context/DataContext"
 
-const ConfirmDelete = ({id, name, collection, open, handleClose}) => {
+const ConfirmDelete = ({id, name, collection, open, handleClose, setDeleteMsg}) => {
 
     const { palette } = useTheme()
     const { getData } = useData()
@@ -44,6 +44,7 @@ const ConfirmDelete = ({id, name, collection, open, handleClose}) => {
             </Button>
             <Button color="error" variant="contained" onClick={() => {
                 deleteItem(id)
+                setDeleteMsg(`" ${name} " Deleted Successfully`)
                 handleClose()
                 }}>
                 Confirm

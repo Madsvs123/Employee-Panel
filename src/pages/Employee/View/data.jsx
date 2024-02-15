@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
     Box,
     Button,
@@ -12,7 +12,10 @@ import {
     TableCell,
     useTheme,
 } from '@mui/material'
-import { Edit, Delete, Check } from '@mui/icons-material'
+import { Edit, Delete } from '@mui/icons-material'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useNavigate } from 'react-router-dom'
 import { useData } from '../../../context/DataContext'
 import ConfirmDelete from "../../../components/ConfirmDelete";
@@ -60,10 +63,21 @@ const DataTable = ({handleModalOpen}) => {
     const {palette} = useTheme()
     const navigate = useNavigate()
     const [confirmDelete, setConfirmDelete] = useState({id : null, name: null, status: false})
-
+    const [deleteMsg, setDeleteMsg] = useState(null)
     const handleDeleteClose = () => {
         setConfirmDelete({id : null, name: null, status: false});
       };
+
+
+      
+  useEffect(() => {
+    if (deleteMsg !== null) {
+      toast.error(deleteMsg, {
+        onClose: () => {setDeleteMsg(null)},
+        containerId: 'delete-container'
+      });
+    }
+  }, [deleteMsg]);
 
 
   return (
@@ -112,7 +126,7 @@ const DataTable = ({handleModalOpen}) => {
                 </Typography>
               </TableCell>
               <TableCell align="center">
-                <Typography fontWeight="600" fontStyle='italic' sx={{color : '#888'}}>
+                <Typography fontWeight="600" fontStyle='italic' sx={{color : '#999'}}>
                   {formmatedDate.split("-").join(" / ")}
                 </Typography>
               </TableCell>
@@ -123,7 +137,7 @@ const DataTable = ({handleModalOpen}) => {
               </TableCell>
               <TableCell sx={{display : "flex", justifyContent : "center", gap : "1rem"}}>
               <Button variant="text"
-                      size="medium"
+                      size="large"
                       color="secondary" 
                       onClick={() => 
                         {
@@ -135,7 +149,7 @@ const DataTable = ({handleModalOpen}) => {
                       <Edit />
                 </Button>
                 <Button variant="text"
-                        size="medium"
+                        size="large"
                         color="error" 
                         onClick={() => {
                           setConfirmDelete({id : employee._id, name: employee.employeeName , status: true})}
@@ -152,6 +166,14 @@ const DataTable = ({handleModalOpen}) => {
       </Table>
     </TableContainer>
 
+    <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        toastStyle={{color: palette.primary.dark, backgroundColor: palette.background.default, fontWeight: 'bold'}}
+        style={{width: '50%'}} 
+        containerId={`delete-container`}
+        />
+
   {confirmDelete.status && (
 
     <ConfirmDelete 
@@ -160,6 +182,7 @@ const DataTable = ({handleModalOpen}) => {
     id={confirmDelete.id} 
     name={confirmDelete.name}
     collection='employee'
+    setDeleteMsg={setDeleteMsg}
     />
 
   )}

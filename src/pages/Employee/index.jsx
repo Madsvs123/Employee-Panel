@@ -27,7 +27,7 @@ const AllEmployees = () => {
     if (submitMsg !== null) {
       toast.success(submitMsg, {
         onClose: () => {setSubmitMsg(null)},
-        toastId: submitMsg
+        containerId: 'success-container'
       });
     }
   }, [submitMsg]);
@@ -40,7 +40,10 @@ const AllEmployees = () => {
         position="top-center"
         autoClose={3000}
         toastStyle={{color: palette.primary.dark, backgroundColor: palette.background.default, fontWeight: 'bold'}}
-        style={{width: '50%'}} />
+        style={{width: '50%'}} 
+        containerId={`success-container`}
+        />
+
       <EmployeePanel handleOpen={handleModalOpen} />
       <DataTable handleModalOpen={handleModalOpen} />
     
