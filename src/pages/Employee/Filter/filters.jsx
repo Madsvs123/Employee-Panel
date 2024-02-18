@@ -22,7 +22,10 @@ const Filters = () => {
 
     const FilterData = (employees, sortBy, direction, searchValue, salaryStatus, startDate, endDate) => {
       var data = employees.map(employee => {
-        return {...employee, jobCode : employee.jobCode.code}
+        if (employee.jobCode !== null) {
+          return { ...employee, jobCode : employee.jobCode.code  }
+        }
+        return employee
       })
 
       // Filter By Start and End Date
