@@ -24,8 +24,7 @@ function App() {
        <CssBaseline>
         <Routes>
 
-            <Route element={<Main />} >
-              
+            <Route path="/" element={<Main />} >
                 <Route path="employee" element={<Employees />} >
                 <Route path="add" element={ <AddEmployee /> } />
                 <Route path="edit/:id" element={ <EditEmployee /> } />
