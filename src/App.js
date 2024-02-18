@@ -25,8 +25,7 @@ function App() {
         <Routes>
 
             <Route element={<Main />} >
-
-              <Route path="/" element={ <Navigate to='/employee' /> } />
+              
                 <Route path="employee" element={<Employees />} >
                 <Route path="add" element={ <AddEmployee /> } />
                 <Route path="edit/:id" element={ <EditEmployee /> } />
