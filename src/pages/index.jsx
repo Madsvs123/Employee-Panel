@@ -1,6 +1,6 @@
-import { Box } from '@mui/material'
-import AppBar from '../components/AppBar'
-import { Outlet } from 'react-router-dom'
+import { Box } from "@mui/material";
+import AppBar from "../components/AppBar";
+import { Outlet } from "react-router-dom";
 
 const Main = () => {
   return (
@@ -9,7 +9,7 @@ const Main = () => {
         <Outlet />
       </AppBar>
     </Box>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;

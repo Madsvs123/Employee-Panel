@@ -1,27 +1,27 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const DataContext = createContext();
 
 export const useData = () => useContext(DataContext);
 
 const DataProvider = ({ children }) => {
-
   const [employees, setEmployees] = useState(null);
   const [filteredData, setFilteredData] = useState(null);
   const [jobs, setJobs] = useState(null);
 
-
-  const getData = async() => {
-    await axios.get(`https://kaied-employee-panel-api.onrender.com/employee`).then(reponse => {
-     setEmployees(reponse.data.employees)
-     setJobs(reponse.data.jobs)
-   })
-   }
+  const getData = async () => {
+    await axios
+      .get(`https://kaied-employee-panel-api.onrender.com/employee`)
+      .then((reponse) => {
+        setEmployees(reponse.data.employees);
+        setJobs(reponse.data.jobs);
+      });
+  };
 
   useEffect(() => {
-    getData()
-  }, [])
+    getData();
+  }, []);
 
   const data = {
     employees,
@@ -30,15 +30,10 @@ const DataProvider = ({ children }) => {
     setJobs,
     filteredData,
     setFilteredData,
-    getData : () => getData(),
-  }
+    getData: () => getData(),
+  };
 
-
-  return (
-    <DataContext.Provider value={data}>
-      {children}
-    </DataContext.Provider>
-  );
+  return <DataContext.Provider value={data}>{children}</DataContext.Provider>;
 };
 
 export default DataProvider;
